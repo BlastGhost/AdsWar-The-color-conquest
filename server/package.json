@@ -1,0 +1,23 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "commonjs",
+  "main": "server.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "tsc && node --trace-uncaught --inspect ./build/server.js",
+    "build": "tsc"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "lowdb": "^7.0.1",
+    "mongoose": "^8.9.5",
+    "nanoid": "^5.0.9",
+    "node-fetch": "^3.3.2",
+    "socket.io": "^4.8.1"
+  }
+}
