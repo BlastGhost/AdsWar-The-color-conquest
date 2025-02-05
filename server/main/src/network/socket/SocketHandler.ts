@@ -5,6 +5,8 @@ import { SOCKET_EVENTS_LISTENER, SocketEventsListener } from "./SocketEventsList
 import Profile from "../../game/profile/Profile.js";
 import { PacketManager } from "../packets/PacketManager.js";
 import Packet from "../packets/Packet.js";
+import { PlayerEventHandler } from "./PlayerEventHandler.js";
+import ClientPacket from "../packets/ClientPacket.js";
 
 
 
@@ -96,13 +98,15 @@ export default class SocketEventHandler {
      * @param event L'évènement appartenant à la catégorie
      * @param packet Les données à traiter
      */
-    private handler(category: string, event: string, packet: Packet): void {
+    private handler(category: string, event: string, packet: ClientPacket): void {
         switch (category) {
+            case SOCKET_EVENTS_LISTENER.PLAYER_CATEGORY:
+                PlayerEventHandler.handler(event, packet);
+                break;
 
             default:
                 console.error(`[Socket] Error : Wrong category received : ${category}`);
                 break;
         }
     }
-
 }

@@ -3,9 +3,9 @@ import http from "http";
 import SocketHandler from "./SocketHandler.js";
 import Profile from "../../game/profile/Profile.js";
 import { GameServer } from "../../game/GameServer.js";
-import Lobby from "../../game/Lobby.js";
 import { PacketManager } from "../packets/PacketManager.js";
 import { SOCKET_EVENTS, SocketEvents } from "./SocketEvents.js";
+import Group from "../../game/world/player/Group.js";
 
 
 
@@ -75,28 +75,29 @@ export namespace SocketProtocol {
 
 
     /**
-     * Envoie un message socket à tous les joueurs d'un lobby en utilisant l'instance du lobby
-     * @param lobby L'instance du lobby auquel le message sera envoyé
+     * Envoie un message socket à tous les joueurs d'un groupe en utilisant l'instance du groupe
+     * @param group L'instance du groupe auquel le message sera envoyé
      * @param event L'évènement à envoyer
      * @param data Les données à envoyer si il y en a
      */
-    export function sendToLobby<E extends SocketEvents>(lobby: Lobby, event: E, data: PacketManager.DataForPacket<E>): void;
+    export function sendToGroup<E extends SocketEvents>(group: Group, event: E, data: PacketManager.DataForPacket<E>): void;
     /**
-     * Envoie un message socket à tous les joueurs d'un lobby en utilisant l'ID du lobby
-     * @param lobbyId L'ID du lobby auquel le message sera envoyé
+     * Envoie un message socket à tous les joueurs d'un groupe en utilisant l'ID du groupe
+     * @param groupId L'ID du groupe auquel le message sera envoyé
      * @param event L'évènement à envoyer
      * @param data Les données à envoyer si il y en a
      */
-    export function sendToLobby<E extends SocketEvents>(lobbyId: string, event: E, data: PacketManager.DataForPacket<E>): void;
-    export function sendToLobby<E extends SocketEvents>(lobbyOrId: Lobby | string, event: E, data: PacketManager.DataForPacket<E>): void {
-        // Gestion avec l'ID du lobby
-        if (typeof lobbyOrId === "string") {
-            const lobby: Lobby = GameServer.getLobbyById(lobbyOrId);
-            sendToLobby(lobby, event, data);
+    export function sendToGroup<E extends SocketEvents>(groupId: string, event: E, data: PacketManager.DataForPacket<E>): void;
+    export function sendToGroup<E extends SocketEvents>(groupOrId: Group | string, event: E, data: PacketManager.DataForPacket<E>): void {
+        // Gestion avec l'ID du group
+        if (typeof groupOrId === "string") {
+            const group = GameServer.getGroupById(groupOrId);
+            if (group)
+                sendToGroup(group, event, data);
         }
         // Gestion avec l'instance du lobby
         else {
-            lobbyOrId.sendSocketToProfiles(event, data);
+            // groupOrId.sendSocketToProfiles(event, data);
         }
     }
 

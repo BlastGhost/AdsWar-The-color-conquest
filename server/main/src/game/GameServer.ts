@@ -1,9 +1,13 @@
 import { PacketManager } from "../network/packets/PacketManager.js";
 import { SocketEvents } from "../network/socket/SocketEvents.js";
 import { Time } from "../utils/time.js";
-import Manager from "./managers/Manager.js";
+import Game from "./Game.js";
+import GroupManager from "./managers/GroupManager.js";
+import PlayerManager from "./managers/PlayerManager.js";
 import ProfileManager from "./managers/ProfileManager.js";
 import Profile from "./profile/Profile.js";
+import Group from "./world/player/Group.js";
+import Player from "./world/player/Player.js";
 
 
 
@@ -12,13 +16,17 @@ import Profile from "./profile/Profile.js";
  * 
  * Le serveur de jeu gère tous les profils ainsi que les différents lobbys de jeu
  */
-export namespace GameServer {    
+export namespace GameServer {
     /** Tous les profiles connectés au serveur */
     export const profiles: ProfileManager = new ProfileManager();
+    export const players: PlayerManager = new PlayerManager();
+    export const groups: GroupManager = new GroupManager();
+
 
     /** Toutes les 10 minutes */
     const timeInterval = 10 * Time.values.minute;
     let cleanInterval: NodeJS.Timeout;
+    export let game: Game;
 
 
 
@@ -27,6 +35,12 @@ export namespace GameServer {
      */
     export function start(): void {
         console.log("[Game Server] Starting...");
+
+
+        // Start a new game
+        game = new Game();
+
+
 
         clean();
         cleanInterval = setInterval(() => {
@@ -50,6 +64,18 @@ export namespace GameServer {
         console.log("[Game Server] Clean");
 
     }
+
+
+
+
+
+    /* -------------------------------------------------------------------------- */
+    /*                                   Groups                                   */
+    /* -------------------------------------------------------------------------- */
+
+    export function getGroupById(groupId: string): Group | undefined {
+        return groups.get(groupId);
+    }
     
 
 
@@ -67,5 +93,11 @@ export namespace GameServer {
     export function sendSocketToAll<E extends SocketEvents>(event: E, data: PacketManager.DataForPacket<E>): void {        
         profiles.sendSocket(event, data);
     }
+
+
+    export function connection() {}
+
+
+    export function deconnection() {}
 
 }

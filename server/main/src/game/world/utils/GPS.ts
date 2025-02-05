@@ -4,6 +4,7 @@ import Vector2 from "./Vector2.js";
 
 
 export default class GPS extends Position {
+    public static readonly ZERO = new GPS(0, 0);
     public static readonly MIN_LATITUDE = -90;
     public static readonly MAX_LATITUDE = 90;
     public static readonly MIN_LONGITUDE = -180;

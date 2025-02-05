@@ -3,6 +3,7 @@ import { NanoId } from "../../../utils/nanoid.js";
 import GroupManager from "../../managers/GroupManager.js";
 import Inventory from "../inventory/Inventory.js";
 import Tile from "../map/Tile.js";
+import GPS from "../utils/GPS.js";
 import Vector2 from "../utils/Vector2.js";
 import Group from "./Group.js";
 import Team from "./Team.js";
@@ -12,21 +13,43 @@ import Team from "./Team.js";
 export default class Player {
     public static readonly PAINT_RADIUS = 3;
 
-    public id: string;
+    public id: string = NanoId.generateId();
     public username: string;
+    public position: Vector2 = Vector2.ZERO;
+    public gpsPosition: GPS = GPS.ZERO;
+    public inventory: Inventory = new Inventory(this);
+    public groups: GroupManager = new GroupManager();
     public team?: Team;
-    public groups: GroupManager;
-    public inventory: Inventory;
-    public position: Vector2;
 
 
 
     constructor(username: string) {
-        this.id = NanoId.generateId();
         this.username = username;
-        this.position = Vector2.ZERO;
-        this.groups = new GroupManager();
-        this.inventory = new Inventory(this);
+    }
+
+
+
+    public updatePositionFromGPS(x: number, y: number): void;
+    public updatePositionFromGPS(gpsPosition: GPS): void;
+    public updatePositionFromGPS(position: number | GPS, y?: number): void {
+        if (typeof position === "number") {
+            this.updatePositionFromGPS(new GPS(position, y!));
+        }
+        else {
+            this.gpsPosition = position;
+            this.updatePosition(position.toVector2());
+        }
+    }
+
+    public updatePosition(x: number, y: number): void;
+    public updatePosition(position: Vector2): void;
+    public updatePosition(xOrPosition: number | Vector2, y?: number): void {
+        if (typeof xOrPosition === "number") {
+            this.updatePosition(new Vector2(xOrPosition, y!));
+        }
+        else {
+            this.position = xOrPosition;
+        }
     }
 
 

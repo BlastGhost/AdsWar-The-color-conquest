@@ -1,7 +1,10 @@
 /** Les événements sockets envoyé par le client */
 export const SOCKET_EVENTS_LISTENER = {
-
     /* --------------------------------- Player --------------------------------- */
+    PLAYER_CATEGORY: "player>",
+
+    UPDATE_POSITION: "update_position",
+    PAINT: "paint",
     
 } as const;
 

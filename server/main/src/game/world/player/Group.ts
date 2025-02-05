@@ -5,7 +5,7 @@ import Player from "./Player.js";
 
 
 export default class Group {
-    public id: string;
+    public id: string = NanoId.generateId();
     public name: string;
     public owner: Player;
     public players: Player[] = [];
@@ -13,7 +13,6 @@ export default class Group {
 
 
     constructor(name: string, owner: Player) {
-        this.id = NanoId.generateId();
         this.name = name;
         this.owner = owner;
     }
