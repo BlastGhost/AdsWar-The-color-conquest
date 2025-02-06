@@ -1,4 +1,5 @@
-import { GPS } from "../../data/WorldGPS.js";
+import GPS from "../utils/GPS.js";
+
 
 
 

@@ -1,6 +1,7 @@
 import { PacketManager } from "../network/packets/PacketManager.js";
 import { SocketEvents } from "../network/socket/SocketEvents.js";
 import { Time } from "../utils/time.js";
+import { Locations } from "./data/Locations.js";
 import Game from "./Game.js";
 import GroupManager from "./managers/GroupManager.js";
 import PlayerManager from "./managers/PlayerManager.js";
@@ -8,6 +9,7 @@ import ProfileManager from "./managers/ProfileManager.js";
 import Profile from "./profile/Profile.js";
 import Group from "./world/player/Group.js";
 import Player from "./world/player/Player.js";
+import GPS from "./world/utils/GPS.js";
 
 
 
@@ -38,7 +40,10 @@ export namespace GameServer {
 
 
         // Start a new game
-        game = new Game();
+        const location = Locations.LE_MANS;
+        game = new Game(location);
+
+        console.log(location.center);
 
 
 
@@ -69,6 +74,15 @@ export namespace GameServer {
 
 
 
+    /* -------------------------------------------------------------------------- */
+    /*                                  Profiles                                  */
+    /* -------------------------------------------------------------------------- */
+
+    export function getProfile(profileId: string): Profile | undefined {
+        return profiles.get(profileId);
+    }
+    
+    
     /* -------------------------------------------------------------------------- */
     /*                                   Groups                                   */
     /* -------------------------------------------------------------------------- */

@@ -1,3 +1,4 @@
+import { Maths } from "./Maths.js";
 import Position from "./Position.js";
 import Vector2 from "./Vector2.js";
 
@@ -11,8 +12,10 @@ export default class GPS extends Position {
     public static readonly MAX_LONGITUDE = 180;
     public static readonly AMPLITUDE_LATITUDE = GPS.MAX_LATITUDE - GPS.MIN_LATITUDE;
     public static readonly AMPLITUDE_LONGITUDE = GPS.MAX_LONGITUDE - GPS.MIN_LONGITUDE;
-    public static readonly DEGREE_KM = 111;
-    public static readonly DEGREE_M = GPS.DEGREE_KM * 1_000;
+    public static readonly LATITUDE_DEGREE_KM = 110.574;
+    public static readonly LONGITUDE_DEGREE_KM = 111.320;
+    public static readonly LATITUDE_DEGREE_M = GPS.LATITUDE_DEGREE_KM * 1_000;
+    public static readonly LONGITUDE_DEGREE_M = GPS.LONGITUDE_DEGREE_KM * 1_000;
 
 
     public longitude: number;
@@ -39,9 +42,12 @@ export default class GPS extends Position {
 
 
     public toVector2(): Vector2 {
+        const latitude = this.latitude * GPS.LATITUDE_DEGREE_KM;
+        const longitude = this.longitude * GPS.LONGITUDE_DEGREE_KM * Math.cos(Maths.degreeToGrad(this.latitude));
+
         return new Vector2(
-            this.longitude * GPS.DEGREE_M,
-            this.latitude * GPS.DEGREE_M
+            longitude * 1_000,
+            latitude * 1_000
         );
     }
 }

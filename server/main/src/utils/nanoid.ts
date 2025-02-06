@@ -36,7 +36,7 @@ export namespace NanoId {
      * @param limit 
      * @returns 
      */
-    export function generateId(limit?: number): string {
+    export function generateId(limit: number = ID_SIZE): string {
         if (limit > ID_SIZE) limit = ID_SIZE;
         return generate(ID_SIZE, ID_ALPHABET, limit);
     }
@@ -48,7 +48,7 @@ export namespace NanoId {
      * @param limit 
      * @returns 
      */
-    export function generateCode(limit?: number): string {
+    export function generateCode(limit: number = CODE_SIZE): string {
         if (limit > CODE_SIZE) limit = CODE_SIZE;
         return generate(CODE_SIZE, CODE_ALPHABET, limit);
     }

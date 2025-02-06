@@ -27,7 +27,6 @@ export namespace SocketProtocol {
      */
     export function start(server: http.Server, port: number): void {
         console.log(`[Socket] starting...`);
-
         io = new Server(server, { transports: ["websocket"] });
 
         console.log(`[Socket] listening on port ${port}`);
@@ -38,7 +37,7 @@ export namespace SocketProtocol {
             console.log(`[Socket] New Connection : ${socket.id}`);
             const query = socket.handshake.query;
 
-
+            
         });
     }
 
@@ -64,7 +63,8 @@ export namespace SocketProtocol {
         // Gestion avec l'ID du profile
         if (typeof profileOrId === "string") {
             const profile = GameServer.getProfile(profileOrId);
-            sendTo(profile, event, data);
+            if (profile)
+                sendTo(profile, event, data);
         }
         // Gestion avec l'instance du profile
         else {

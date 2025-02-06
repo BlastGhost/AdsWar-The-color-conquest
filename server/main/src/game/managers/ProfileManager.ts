@@ -25,7 +25,7 @@ export default class ProfileManager extends Manager<Profile> {
      */
     public start(): void {
         this.toArray().forEach((profile) => {
-            profile.start();
+            // profile.start();
         });
     }
 
@@ -35,24 +35,10 @@ export default class ProfileManager extends Manager<Profile> {
      */
     public stop(game: Game): void {
         this.toArray().forEach((profile) => {
-            profile.stop(game);
+            // profile.stop(game);
         });
     }
 
-
-
-    /**
-     * Indique si tous les profiles sont prêts
-     * @returns true si tous les profiles sont prêts, false sinon
-     */
-    public areReady(): boolean {
-        return this.toArray().every((profile) => profile.isReady);
-    }
-
-
-    public setReady(ready: boolean): void {
-        this.forEach((profile) => profile.ready(ready));
-    }
 
 
 

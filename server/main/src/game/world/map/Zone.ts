@@ -17,18 +17,44 @@ export default class Zone {
     public position: Vector2;
     /** La taille de la zone (en bas à droite) */
     public size: Vector2;
-    public tiles: TileManager;
+    public tiles: TileManager = new TileManager();
     public claimer?: Group;
 
-    
+    public adForAll: boolean = false;
+    public oneAd: boolean = true;
+    public adWatched: number = -1;
 
 
 
 
-    constructor(positionX: number, positionY: number, sizeX: number, sizeY: number) {
+
+
+    constructor(positionX: number, positionY: number, sizeX: number = Zone.SIZE, sizeY: number = Zone.SIZE) {
         this.position = new Vector2(positionX, positionY);
         this.size = new Vector2(sizeX, sizeY);
-        this.tiles = new TileManager();
+
+        this._init();
+    }
+
+
+
+
+    private _init() {
+        // this._initTiles();
+    }
+
+    private _initTiles() {
+        const xSize = Zone.SIZE;
+        const ySize = Zone.SIZE;
+
+        for (let x = -xSize / 2; x < xSize / 2; x++) {
+            for (let y = -ySize / 2; y < ySize / 2; y++) {
+
+                const tile = new Tile(x, y);
+                this.tiles.set(tile.position.toMinimalString(), tile);
+
+            }
+        }
     }
 
 
@@ -40,7 +66,7 @@ export default class Zone {
 
 
 
-    
+
     public notify(): void {
         this.claimer?.notifyPlayers();
     }
@@ -65,7 +91,7 @@ export default class Zone {
     public hasCoord(xOrPos: number | Position, y?: number): boolean {
         if (typeof xOrPos === "number") {
             if (!y) return console.error("Has Coord but y coordinate missing"), false;
-            
+
             return this.position.x <= xOrPos &&
                 this.position.y <= y &&
                 this.position.x + this.size.x > xOrPos &&
@@ -97,5 +123,44 @@ export default class Zone {
     public canPaintIn(player: Player): boolean {
         if (!this.isClaimed) return true;
         return player.groups.has(this.claimer!.id);
+    }
+
+
+
+
+
+    /* -------------------------------------------------------------------------- */
+    /*                                    Claim                                   */
+    /* -------------------------------------------------------------------------- */
+
+    public onClaim(): void {
+        this.oneAd = false;
+    }
+
+    public onUnclaim(): void {
+        this.oneAd = true;
+
+        this.onAllAdWatched();
+    }
+
+
+    public onInfection(): void {
+        this.adForAll = true;
+        this.adWatched = 0;
+    }
+
+
+    public onAdWatch(): void {
+        this.adWatched++;
+
+        if (this.adWatched === this.claimer?.players.length)
+            this.onAllAdWatched();
+    }
+
+
+
+    public onAllAdWatched(): void {
+        this.adForAll = false;
+        this.adWatched = -1;
     }
 }

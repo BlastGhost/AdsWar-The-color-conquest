@@ -1,6 +1,6 @@
 import express from "express";
 import { Network } from "./src/network/Network.js";
-import { CacheManager } from "./api/cache/CacheManager.js"
+// import { CacheManager } from "./api/cache/CacheManager.js"
 
 
 
@@ -43,7 +43,7 @@ import('./api/routes/global_routes.js');
 
 /* ------------------------------ Start Server ------------------------------ */
 
-CacheManager.init();            // Initialise le cache
+// CacheManager.init();            // Initialise le cache
 
 await Network.start(app);       // Démarre les systèmes de communication (HTTP & Socket)
 

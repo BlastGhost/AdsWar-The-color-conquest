@@ -1,23 +1,96 @@
+import Location from "./data/Location.js";
 import ZoneManager from "./managers/ZoneManager.js";
 import Tile from "./world/map/Tile.js";
 import Zone from "./world/map/Zone.js";
 import Player from "./world/player/Player.js";
 import Color from "./world/utils/Color.js";
+import GPS from "./world/utils/GPS.js";
 import Position from "./world/utils/Position.js";
 import Vector2 from "./world/utils/Vector2.js";
 
 
 
 export default class Game {
+    public startTimestamp: number;
     public lastUpdate: number;
+    public endTimestamp: number;
 
     public zones: ZoneManager = new ZoneManager();
+    public startPositionGPS: GPS;
+    public endPositionGPS: GPS;
+    public startPositionVector: Vector2;
+    public endPositionVector: Vector2;
+    
     
 
 
 
-    constructor() {
+    constructor(location: Location);
+    constructor(startPosition: GPS, endPosition: GPS);
+    constructor(locationOrStart: Location | GPS, endPosition?: GPS) {
+        if (locationOrStart instanceof Location) {
+            this.setStartPosition(locationOrStart.start);
+            this.setEndPosition(locationOrStart.end);
+        }
+        else if (locationOrStart instanceof GPS) {
+            this.setStartPosition(locationOrStart);
+            this.setEndPosition(endPosition!);
+        }
 
+
+        this._init();
+
+        console.log(`[Game] New Game created`);
+        console.log(`- Size : ${this.size}`);
+        console.log(`- Zone : ${this.zones.size}`);
+        console.log(`- Tile : ${this.zones.toArray()[0].tiles.size}`);
+    }
+
+
+
+
+
+    
+    private _init() {
+        this._initZones();
+    }
+
+    private _initZones() {
+        const size = this.size;
+        const xSize = size.x / (Zone.SIZE * Tile.SIZE);
+        const ySize = size.y / (Zone.SIZE * Tile.SIZE);
+
+        for (let x = -xSize / 2; x < xSize / 2; x++) {
+            for (let y = -ySize / 2; y < ySize / 2; y++) {
+
+                const zone = new Zone(x, y);
+                this.zones.set(zone.position.toMinimalString(), zone);
+
+            }
+        }
+    }
+
+
+
+    
+
+    public setStartPosition(position: GPS): void {
+        this.startPositionGPS = position;
+        this.startPositionVector = position.toVector2();
+    }
+
+    public setEndPosition(position: GPS): void {
+        this.endPositionGPS = position;
+        this.endPositionVector = position.toVector2();
+    }
+
+
+
+    public get size(): Vector2 {
+        const x = Math.abs(this.endPositionVector.x - this.startPositionVector.x);
+        const y = Math.abs(this.endPositionVector.y - this.startPositionVector.y);
+        
+        return new Vector2(x, y);
     }
 
 

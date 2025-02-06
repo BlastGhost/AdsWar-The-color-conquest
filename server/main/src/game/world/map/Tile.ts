@@ -7,8 +7,8 @@ import Vector2 from "../utils/Vector2.js";
 
 export default class Tile {
     public static readonly SIZE = 20;
-    public static readonly WIDTH = Tile.SIZE * GPS.DEGREE_M;
-    public static readonly HEIGHT = Tile.SIZE * GPS.DEGREE_M;
+    public static readonly WIDTH = Tile.SIZE * GPS.LONGITUDE_DEGREE_M;
+    public static readonly HEIGHT = Tile.SIZE * GPS.LATITUDE_DEGREE_M;
 
     public position: Vector2;
     public color: Color;
@@ -16,8 +16,8 @@ export default class Tile {
 
 
 
-    constructor() {
-
+    constructor(x: number, y: number) {
+        this.position = new Vector2(x, y);
     }
 
 

@@ -1,4 +1,4 @@
-import Services from './services.js';
+import Services from './Services.js';
 import { PlayerData } from '../schemas/player_schema.js';
 import { models } from 'mongoose';
 

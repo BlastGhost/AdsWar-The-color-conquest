@@ -5,10 +5,14 @@ import Player from "./Player.js";
 
 
 export default class Group {
+    public static readonly DEFAULT_GROUP_LIMIT = 20;
+
     public id: string = NanoId.generateId();
     public name: string;
+    public password: string;
     public owner: Player;
     public players: Player[] = [];
+    public limit: number = Group.DEFAULT_GROUP_LIMIT;
 
 
 
