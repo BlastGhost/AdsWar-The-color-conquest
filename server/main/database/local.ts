@@ -13,14 +13,14 @@ import { JSONFile } from "lowdb/node";
 
 
 
-type Database = {};
-const defaultDatabase: Database = {};
+type LocalDatabase = {};
+const defaultDatabase: LocalDatabase = {};
 
 
 
 const dataFilePath: string = path.join(path.dirname(fileURLToPath(import.meta.url)), './data.json');
-const adapterDatabase: JSONFile<Database> = new JSONFile<Database>(dataFilePath);
-const local_database: Low<Database> = new Low(adapterDatabase, defaultDatabase);
+const adapterDatabase: JSONFile<LocalDatabase> = new JSONFile<LocalDatabase>(dataFilePath);
+const local_database: Low<LocalDatabase> = new Low(adapterDatabase, defaultDatabase);
 await local_database.read();
 
 export default local_database;

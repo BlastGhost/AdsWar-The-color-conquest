@@ -12,39 +12,20 @@ export const app = express();
 
 /* -------------------------------- Database -------------------------------- */
 
-// Connexion à MongoDB
-// En cas d'erreur le serveur ne démarre pas
-import mongodb_connection from "./database/connection.js";
-
-try {
-    await mongodb_connection();
-} catch (error) {
-    console.error("[MongoDB] Connection Error");
-    if (error) console.error(error);
-    process.exit();
-}
-
-// Initialisation de la base de données local
-import "./database/local.js";
-
+import { Database } from "./database/Database.js";
 
 
 /* ----------------------------------- API ---------------------------------- */
 
 import { GameServer } from "./src/game/GameServer.js";
-import apiRoutes from "./api/routes/routes.js";
-app.use("/api", apiRoutes);
-
-
-import('./api/routes/routes.js');
-import('./api/routes/global_routes.js');
+import { API } from "./api/API.js";
 
 
 
 /* ------------------------------ Start Server ------------------------------ */
 
-// CacheManager.init();            // Initialise le cache
-
+API.start();                    // Démarre l'API
 await Network.start(app);       // Démarre les systèmes de communication (HTTP & Socket)
+Database.start();               // Connection à la base de données
 
 GameServer.start();             // Démarre le serveur de jeu
