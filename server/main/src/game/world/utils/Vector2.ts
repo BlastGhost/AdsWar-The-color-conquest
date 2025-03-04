@@ -107,6 +107,12 @@ export default class Vector2 extends Position {
 
 
 
+    public floor(): Vector2 {
+        return new Vector2(Math.floor(this.x), Math.floor(this.y));
+    }
+
+
+
 
 
     /**
@@ -215,6 +221,15 @@ export default class Vector2 extends Position {
      */
     public static lerp(angle: number): number {
         return angle - Math.floor(angle / 360.0) * 360.0;
+    }
+
+
+    public static of(minimalPosition: string): Vector2 {
+        const positions = minimalPosition.split(":");
+        const x = Number(positions[0]);
+        const z = Number(positions[1]);
+
+        return new Vector2(x, z);
     }
 
 }

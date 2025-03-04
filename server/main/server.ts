@@ -26,6 +26,7 @@ import { API } from "./api/API.js";
 
 API.start();                    // Démarre l'API
 await Network.start(app);       // Démarre les systèmes de communication (HTTP & Socket)
-Database.start();               // Connection à la base de données
+// Database.start();               // Connection à la base de données
 
 GameServer.start();             // Démarre le serveur de jeu
+

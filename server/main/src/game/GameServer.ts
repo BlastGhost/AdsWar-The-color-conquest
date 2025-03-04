@@ -1,6 +1,7 @@
 import { PacketManager } from "../network/packets/PacketManager.js";
 import { SocketEvents } from "../network/socket/SocketEvents.js";
 import { Time } from "../utils/time.js";
+import QuadTree from "../utils/tree/QuadTree.js";
 import { Locations } from "./data/Locations.js";
 import Game from "./Game.js";
 import GroupManager from "./managers/GroupManager.js";
@@ -10,6 +11,7 @@ import Profile from "./profile/Profile.js";
 import Group from "./world/player/Group.js";
 import Player from "./world/player/Player.js";
 import GPS from "./world/utils/GPS.js";
+import Vector2 from "./world/utils/Vector2.js";
 
 
 
@@ -39,12 +41,24 @@ export namespace GameServer {
         console.log("[Game Server] Starting...");
 
 
+        
+        
         // Start a new game
         const location = Locations.LE_MANS;
         game = new Game(location);
-
+        
         console.log(location.center);
+        
+        let tree = new QuadTree<number>(new Vector2(8, 8));
+        
+        tree.set(8, 0, 0, tree.root);
+        tree.set(8, 0, 1, tree.root);
+        tree.set(8, 1, 0, tree.root);
+        tree.set(8, 1, 1, tree.root);
 
+        const treeSaved = tree.save();
+        const newTree = QuadTree.load<number>(treeSaved);
+        console.log(newTree)
 
 
         clean();

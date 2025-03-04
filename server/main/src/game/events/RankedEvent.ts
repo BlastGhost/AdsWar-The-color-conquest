@@ -4,7 +4,7 @@ import Player from "../world/player/Player.js";
 
 
 export default abstract class RankedEvent extends GameEvent {
-    public ranks: Map<string, number>;
+    public ranks: Map<string, number> = new Map();
 
 
 

@@ -41,9 +41,9 @@ export default class Game {
         this._init();
 
         console.log(`[Game] New Game created`);
-        console.log(`- Size : ${this.size}`);
-        console.log(`- Zone : ${this.zones.size}`);
-        console.log(`- Tile : ${this.zones.toArray()[0].tiles.size}`);
+        console.log(`- Size (m) : ${this.size}`);
+        console.log(`- Zone (?) : ${this.zones.size}`);
+        console.log(`- Tile (?) : ${this.size.scale(1 / 20)}`);
     }
 
 

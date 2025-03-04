@@ -1,4 +1,5 @@
 import GPS from "../world/utils/GPS.js";
+import Vector2 from "../world/utils/Vector2.js";
 
 
 
@@ -34,6 +35,10 @@ export default class Location {
             (this.startLongitude + this.endLongitude) / 2,
             (this.startLatitude + this.endLatitude) / 2
         );
+    }
+
+    public get size(): Vector2 {
+        return Vector2.ZERO;
     }
 
 
