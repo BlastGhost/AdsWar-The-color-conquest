@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">AdWars</string>
+
+    <string name="inventory">Inventory</string>
+
+
+
+    <string name="item_test">Test</string>
+    <string name="item_description">Description</string>
+</resources>
