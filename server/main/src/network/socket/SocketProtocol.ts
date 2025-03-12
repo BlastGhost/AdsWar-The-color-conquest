@@ -27,9 +27,15 @@ export namespace SocketProtocol {
      */
     export function start(server: http.Server, port: number): void {
         console.log(`[Socket] starting...`);
-        io = new Server(server, { transports: ["websocket"] });
+        io = new Server(server, {
+            transports: ["websocket"],
+            cors: {
+                origin: "*",
+                methods: ["GET", "POST"]
+            }
+        });
 
-        console.log(`[Socket] listening on port ${port}`);
+        console.log(`[Socket] listening on port 53000 / ${port}`);
 
 
         // Lorsque l'on détecte une nouvelle connection socket 
@@ -37,7 +43,7 @@ export namespace SocketProtocol {
             console.log(`[Socket] New Connection : ${socket.id}`);
             const query = socket.handshake.query;
 
-            
+
         });
     }
 
