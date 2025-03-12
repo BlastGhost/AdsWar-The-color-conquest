@@ -1,0 +1,40 @@
+Player connection :
+    - Player
+    - Timestamp fin de la partie
+
+
+
+
+Map :
+    Toutes les 5 secondes
+        Client -> Server :
+            - position GPS
+            - zoom
+
+        Server response :
+            - tiles et zones autour du joueur
+
+
+
+
+
+
+Dashboard :
+    - Teams
+    - Player :
+        - Paint tank
+
+
+
+Shop :
+    - 1 requête seulement pour récupérer les prix
+
+Product :
+    - product data
+
+
+Groups :
+    - groupes
+
+Group :
+    - group
