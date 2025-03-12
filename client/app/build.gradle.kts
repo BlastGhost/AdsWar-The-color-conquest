@@ -18,6 +18,9 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
+    buildFeatures {
+        compose = true
+    }
     buildTypes {
         release {
             isMinifyEnabled = false
@@ -41,6 +44,8 @@ android {
 
 dependencies {
 
+    implementation("com.mapbox.maps:android:11.10.2")
+    implementation("com.mapbox.extension:maps-compose:11.11.0-beta.1")
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

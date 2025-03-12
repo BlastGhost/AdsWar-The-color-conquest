@@ -132,3 +132,5 @@ dist
 dist/
 build/
 configuration/
+client/app/src/main/res/values/mapbox_access_token.xml
+/client/.idea/
