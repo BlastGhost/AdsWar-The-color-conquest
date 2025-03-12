@@ -1,5 +1,6 @@
 import Location from "./data/Location.js";
 import ZoneManager from "./managers/ZoneManager.js";
+import Terrain from "./world/map/Terrain.js";
 import Tile from "./world/map/Tile.js";
 import Zone from "./world/map/Zone.js";
 import Player from "./world/player/Player.js";
@@ -16,6 +17,7 @@ export default class Game {
     public endTimestamp: number;
 
     public zones: ZoneManager = new ZoneManager();
+    public terrain: Terrain;
     public startPositionGPS: GPS;
     public endPositionGPS: GPS;
     public startPositionVector: Vector2;
@@ -132,16 +134,17 @@ export default class Game {
     public getTile(x: number, y: number): Tile | undefined;
     public getTile(position: Position): Tile | undefined;
     public getTile(xOrPosition: number | Position, y?: number): Tile | undefined {
-        if (typeof xOrPosition === "number") {
-            if (!y) return console.error("[Game] Error while getting tile : y is missing"), undefined;
-            return this.getTile(new Vector2(xOrPosition, y));
-        }
-        else {
-            const zone = this.getZoneWithTile(xOrPosition);
-            if (!zone) return undefined;
-            return zone.getTile(xOrPosition);
-        }
+        // if (typeof xOrPosition === "number") {
+        //     if (!y) return console.error("[Game] Error while getting tile : y is missing"), undefined;
+        //     return this.getTile(new Vector2(xOrPosition, y));
+        // }
+        // else {
+        //     const zone = this.getZoneWithTile(xOrPosition);
+        //     if (!zone) return undefined;
+        //     return zone.getTile(xOrPosition);
+        // }
 
+        return this.terrain.getTile()
     }
 
     public canPaintIn(player: Player, zone: Zone, tile: Tile): boolean {

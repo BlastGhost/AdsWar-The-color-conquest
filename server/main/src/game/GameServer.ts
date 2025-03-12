@@ -49,16 +49,7 @@ export namespace GameServer {
         
         console.log(location.center);
         
-        let tree = new QuadTree<number>(new Vector2(8, 8));
         
-        tree.set(8, 0, 0, tree.root);
-        tree.set(8, 0, 1, tree.root);
-        tree.set(8, 1, 0, tree.root);
-        tree.set(8, 1, 1, tree.root);
-
-        const treeSaved = tree.save();
-        const newTree = QuadTree.load<number>(treeSaved);
-        console.log(newTree)
 
 
         clean();

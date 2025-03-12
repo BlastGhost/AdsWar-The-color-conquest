@@ -11,10 +11,11 @@ export default class QuadTree<T> {
     constructor(size: Vector2, position: Vector2 = Vector2.ZERO) {
         this.root = new Node(size, position)
     }
+    
+    
+    
 
-
-
-
+    
     public add(node: Node<T>, currentNode: Node<T>) {
         if (node.position.equals(currentNode.position) && node.size.equals(currentNode.size)) {
             currentNode.data = node.data;

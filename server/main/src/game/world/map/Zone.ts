@@ -13,11 +13,11 @@ import Tile from "./Tile.js";
 export default class Zone {
     public static readonly SIZE = 11;
 
+    public tiles = new TileManager();
     /** Le point de départ de la zone (en haut à gauche) */
     public position: Vector2;
     /** La taille de la zone (en bas à droite) */
     public size: Vector2;
-    public tiles: TileManager = new TileManager();
     public claimer?: Group;
 
     public adForAll: boolean = false;
