@@ -44,11 +44,7 @@ fun CarousselPreview() {
             val list: MutableList<@Composable () -> Unit> = mutableListOf()
             for (i in 1..10) {
                 list.add {
-                    ProductCard(
-                        productName = R.string.item_test,
-                        image = R.drawable.ic_launcher_background,
-                        contentDescription = R.string.item_description
-                    )
+                    SaveVariable()
                 }
             }
             Caroussel(
