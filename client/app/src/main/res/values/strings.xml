@@ -17,9 +17,14 @@
     <string name="create_group_input_name">Group name</string>
     <string name="create_group_input_password">Group password</string>
     <string name="create_group_button">Create</string>
+
+    <string name="join_group_title">Join group</string>
+    <string name="join_group_input_password">Password</string>
+    <string name="join_group_button">Join</string>
+
+
     <string name="item_test">Test</string>
     <string name="item_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vel dapibus augue. Maecenas porta consequat sagittis. Curabitur vel nisl quis leo interdum mattis ac nec ante. Phasellus sollicitudin molestie libero sed pharetra. Nullam sed lorem in metus pretium pharetra et at velit.</string>
-
 
 
 </resources>
