@@ -7,12 +7,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.mapbox.geojson.Point
 import com.mapbox.maps.extension.compose.MapboxMap
 import com.mapbox.maps.extension.compose.animation.viewport.rememberMapViewportState
+import com.mapbox.maps.extension.style.expressions.generated.Expression.Companion.pitch
+import com.mapbox.maps.extension.style.expressions.generated.Expression.Companion.zoom
 
 @Composable
 fun MapApi(
     modifier: Modifier = Modifier
 ) {
-    MapboxMap(
+    /**MapboxMap(
         modifier,
         mapViewportState = rememberMapViewportState {
             setCameraOptions {
@@ -22,7 +24,7 @@ fun MapApi(
                 bearing(0.0)
             }
         },
-    )
+    )*/
 }
 
 

@@ -3,7 +3,6 @@ package com.example.adwars.component
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -31,7 +30,7 @@ fun Inventory(
     for (i in 1..10) {
         list.add {
             ProductCard(
-                productName = R.string.item_test,
+                productName = stringResource(R.string.item_test),
                 image = R.drawable.ic_launcher_background,
                 contentDescription = R.string.item_description
             )

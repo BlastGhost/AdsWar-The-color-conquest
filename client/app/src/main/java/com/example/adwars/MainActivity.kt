@@ -12,6 +12,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.adwars.component.Carousel
@@ -29,7 +30,7 @@ class MainActivity : ComponentActivity() {
                 for (i in 1..10) {
                     list.add {
                         ProductCard(
-                            productName = R.string.item_test,
+                            productName = stringResource(R.string.item_test),
                             image = R.drawable.ic_launcher_foreground,
                             contentDescription = R.string.item_description
                         )
@@ -55,7 +56,7 @@ fun MainPreview() {
             for (i in 1..10) {
                 list.add {
                     ProductCard(
-                        productName = R.string.item_test,
+                        productName = stringResource(R.string.item_test),
                         image = R.drawable.ic_launcher_background,
                         contentDescription = R.string.item_description
                     )
