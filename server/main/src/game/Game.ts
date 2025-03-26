@@ -22,6 +22,9 @@ export default class Game {
     public endPositionGPS: GPS;
     public startPositionVector: Vector2;
     public endPositionVector: Vector2;
+
+    public points: Map<string, number> = new Map();
+    public tilesPainter: Map<string, string> = new Map();
     
     
 
@@ -134,28 +137,85 @@ export default class Game {
     public getTile(x: number, y: number): Tile | undefined;
     public getTile(position: Position): Tile | undefined;
     public getTile(xOrPosition: number | Position, y?: number): Tile | undefined {
-        // if (typeof xOrPosition === "number") {
-        //     if (!y) return console.error("[Game] Error while getting tile : y is missing"), undefined;
-        //     return this.getTile(new Vector2(xOrPosition, y));
-        // }
-        // else {
-        //     const zone = this.getZoneWithTile(xOrPosition);
-        //     if (!zone) return undefined;
-        //     return zone.getTile(xOrPosition);
-        // }
-
-        return this.terrain.getTile()
+        if (typeof xOrPosition === "number") {
+            if (!y) return console.error("[Game] Error while getting tile : y is missing"), undefined;
+            return this.terrain.getTile(xOrPosition, y);
+        }
+        else 
+            return this.terrain.getTileWithPosition(xOrPosition);
     }
 
-    public canPaintIn(player: Player, zone: Zone, tile: Tile): boolean {
+    // public canPaintIn(player: Player, zone: Zone, tile: Tile): boolean {
+    //     if (!zone.isClaimed)
+    //         return player.isCloseEnoughToPaint(tile);
+    //     else {
+    //         return player.groups.has(zone.claimer!.id);
+    //     }
+    // }
+
+    public canPaintAt(player: Player, position: Vector2, zone?: Zone): boolean {
+        zone = zone ?? this.getZoneWithTile(position);
+        if (!zone)
+            return false;
+
         if (!zone.isClaimed)
-            return player.isCloseEnoughToPaint(tile);
+            return player.isCloseEnoughToPaint(position);
         else {
             return player.groups.has(zone.claimer!.id);
         }
     }
 
+
+
     public playerPaint(player: Player, tile: Tile, color: Color): void {
-        tile.paint(player, color);
+        const position = tile.position;
+        const positionString = position.toMinimalString()
+        const painter = tile.painter;
+
+        // Points management
+        if (painter) this.removePointFrom(painter.id);
+        this.givePointTo(player.id);
+        
+        // Set the painter of the tile
+        this.tilesPainter.set(positionString, player.id);
+
+        // Change the color on the terrain
+        this.terrain.set(color, position.x, position.y, this.terrain.root);
+    }
+
+
+    /**
+     * Give points to the player
+     * @param player The player
+     */
+    public givePointTo(player: string) {
+        // If the player doesn't have points
+        // Then we set them at 1
+        if (!this.points.has(player))
+            this.points.set(player, 1);
+        // Otherwise we just add the points
+        else {
+            const currentPoint = this.points.get(player)!;
+            this.points.set(player, currentPoint + 1);
+        }
+    }
+
+    /**
+     * Remove points from the player
+     * @param player The player
+     */
+    public removePointFrom(player: string) {
+        // If the player has points
+        // Then we remove points from it scores
+        if (this.points.has(player)) {
+            const currentPoint = this.points.get(player)!;
+
+            // If the player has no point anymore
+            // We remove it from the cache
+            if (currentPoint - 1 <= 0)
+                this.points.delete(player);
+            else
+                this.points.set(player, currentPoint - 1);
+        }
     }
 }

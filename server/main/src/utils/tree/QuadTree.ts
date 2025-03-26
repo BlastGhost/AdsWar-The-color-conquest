@@ -1,9 +1,10 @@
 import Vector2 from "../../game/world/utils/Vector2.js";
+import Comparable from "../Comparable.js";
 import Node from "./Node.js";
 
 
 
-export default class QuadTree<T> {
+export default class QuadTree<T extends Comparable<T>> {
     public root: Node<T>;
 
 
@@ -214,7 +215,7 @@ export default class QuadTree<T> {
 
 
 
-    public static load<T>(datas: string[]) {
+    public static load<T extends Comparable<T>>(datas: string[]) {
         const rootData = JSON.parse(datas.pop()!!);
         const tree = new QuadTree<T>(Vector2.of(rootData.size), Vector2.of(rootData.position));
 

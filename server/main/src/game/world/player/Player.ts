@@ -78,23 +78,23 @@ export default class Player {
 
 
 
-    public isCloseEnoughToPaint(tile: Tile): boolean {
-        return this.distanceTo(tile) <= Player.PAINT_RADIUS;
+    // public isCloseEnoughToPaint(tile: Tile): boolean {
+    //     return this.distanceTo(tile) <= Player.PAINT_RADIUS;
+    // }
+
+    public isCloseEnoughToPaint(position: Vector2): boolean {
+        return this.distanceTo(position) <= Player.PAINT_RADIUS;
     }
 
 
 
-    public distanceTo(tile: Tile): number;
     public distanceTo(player: Player): number;
     public distanceTo(position: Vector2): number;
     public distanceTo(x: number, y: number): number;
-    public distanceTo(xOrTileOrPlayerOrPosition: Tile | Player | Vector2 | number, y?: number): number {
+    public distanceTo(xOrTileOrPlayerOrPosition: Player | Vector2 | number, y?: number): number {
         let position: Vector2;
 
-        if (xOrTileOrPlayerOrPosition instanceof Tile) {
-            position = xOrTileOrPlayerOrPosition.position;
-        }
-        else if (xOrTileOrPlayerOrPosition instanceof Player) {
+        if (xOrTileOrPlayerOrPosition instanceof Player) {
             position = xOrTileOrPlayerOrPosition.position;
         }
         else if (xOrTileOrPlayerOrPosition instanceof Vector2) {
