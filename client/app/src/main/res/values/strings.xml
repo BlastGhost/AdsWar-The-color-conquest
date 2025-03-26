@@ -1,10 +1,18 @@
 <resources>
     <string name="app_name">AdWars</string>
 
-    <string name="inventory">Inventory</string>
 
+
+    <string name="inventory">Inventory</string>
+    <string name="shop">Shop</string>
+    <string name="coins">Coins</string>
+
+    <string name="go">GO !</string>
 
 
     <string name="item_test">Test</string>
-    <string name="item_description">Description</string>
+    <string name="item_description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vel dapibus augue. Maecenas porta consequat sagittis. Curabitur vel nisl quis leo interdum mattis ac nec ante. Phasellus sollicitudin molestie libero sed pharetra. Nullam sed lorem in metus pretium pharetra et at velit.</string>
+
+
+
 </resources>
