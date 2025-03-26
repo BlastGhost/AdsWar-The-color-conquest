@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <item name="item" type="xml">
-        <id>1</id>
-        <name>R.strings</name>
-        <image>R.drawable.ic_launcher_background</image>
-    </item>
-
-</resources>
