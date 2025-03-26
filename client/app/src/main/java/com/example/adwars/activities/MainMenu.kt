@@ -11,6 +11,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -27,7 +28,6 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.example.adwars.R
-import com.example.adwars.component.Container
 import com.example.adwars.ui.theme.AdWarsTheme
 
 class MainMenu : ComponentActivity() , SensorEventListener {
@@ -116,7 +116,7 @@ fun Username(
     modifier: Modifier = Modifier,
     textModifier: Modifier = Modifier,
 ) {
-    Container (
+    Box (
         modifier = modifier
             .padding(horizontal = 25.dp)
             .background(color = colorResource(R.color.primary),shape = RoundedCornerShape(10.dp))

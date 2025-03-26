@@ -52,7 +52,7 @@ fun ProductCard(
                 .background(color = Color.Transparent)
                 .clip(RoundedCornerShape(22.dp))
         )
-        Container(
+        Box(
             modifier = Modifier
                 .background(
                     brush = Brush.verticalGradient(
