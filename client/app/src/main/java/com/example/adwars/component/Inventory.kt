@@ -1,6 +1,7 @@
 package com.example.adwars.component
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -14,6 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.TextUnit
@@ -23,7 +25,8 @@ import com.example.adwars.R
 
 @Composable
 fun Inventory(
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    backgroundColor: Color = colorResource(R.color.primary),
 ) {
     val list: MutableList<@Composable () -> Unit> = mutableListOf()
     for (i in 1..10) {
@@ -39,7 +42,7 @@ fun Inventory(
         modifier = modifier
             .padding(horizontal = 20.dp, vertical = 20.dp)
             .clip(shape = RoundedCornerShape(5))
-            .background(color = Color.LightGray)
+            .background(color = backgroundColor)
     ) {
         Box(
             modifier = Modifier
@@ -48,22 +51,25 @@ fun Inventory(
             Text(
                 text = stringResource(R.string.inventory),
                 fontSize = TextUnit(20f, TextUnitType.Sp),
-                color = Color.Red,
+                color = colorResource(R.color.secondary),
                 modifier = Modifier
                     .align(alignment = Alignment.TopStart)
+                    .padding(top = 10.dp, start = 25.dp)
             )
             Text(
                 text = "0000 pièces",
                 fontSize = TextUnit(20f, TextUnitType.Sp),
-                color = Color.Blue,
+                color = colorResource(R.color.secondary),
                 modifier = Modifier
                     .align(alignment = Alignment.TopEnd)
-                    //.padding(top = 5.dp, end = 5.dp)
+                    .padding(top = 10.dp, end = 15.dp)
+                    .border(width = 2.dp, color = colorResource(R.color.white), shape = RoundedCornerShape(10.dp))
+                    .padding(3.dp)
             )
             Caroussel(
                 listContent = list,
                 modifier = modifier
-                    .padding(top = 20.dp)
+                    .padding(top = 25.dp)
             )
         }
     }
