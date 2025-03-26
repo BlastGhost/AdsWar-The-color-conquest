@@ -1,6 +1,7 @@
 import Game from "../../game/Game.js";
 import { GameServer } from "../../game/GameServer.js";
 import Player from "../../game/world/player/Player.js";
+import Color from "../../game/world/utils/Color.js";
 import GPS from "../../game/world/utils/GPS.js";
 import ClientPacket from "../packets/ClientPacket.js";
 import ClientPlayerPaintPacket from "../packets/ClientPlayerPaintPacket.js";
@@ -24,17 +25,17 @@ export namespace PlayerEventHandler {
 
         updatePosition(player, packet);
 
-        switch (event) {
-            case SOCKET_EVENTS_LISTENER.UPDATE_POSITION: break;
+        // switch (event) {
+        //     case SOCKET_EVENTS_LISTENER.UPDATE_POSITION: break;
 
-            case SOCKET_EVENTS_LISTENER.PAINT: 
-                paint(player, packet as ClientPlayerPaintPacket);
-                break;
+        //     case SOCKET_EVENTS_LISTENER.PAINT: 
+        //         paint(player, packet as ClientPlayerPaintPacket);
+        //         break;
 
-            default:
-                console.error(`[Socket] Error Player : Wrong event received : ${event}`);
-                break;
-        }
+        //     default:
+        //         console.error(`[Socket] Error Player : Wrong event received : ${event}`);
+        //         break;
+        // }
     }
 
 
@@ -45,19 +46,38 @@ export namespace PlayerEventHandler {
 
 
 
-    function paint(player: Player, packet: ClientPlayerPaintPacket): void {
-        const gpsPosition = new GPS(packet.targetLongitude, packet.targetLatitude);
+    // function paint(player: Player, packet: ClientPlayerPaintPacket): void {
+    //     const gpsPosition = new GPS(packet.targetLongitude, packet.targetLatitude);
+    //     const position = gpsPosition.toVector2();
+
+    //     const zone = game.getZoneWithTile(position);
+    //     if (!zone) return console.error(`[Socket] Error Player : Zone not found at : ${packet.targetLongitude}, ${packet.targetLatitude}`);
+
+
+    //     const tile = zone?.getTile(position.x, position.y);
+    //     if (!tile) return console.error(`[Socket] Error Player : Tile not found at : ${packet.targetLongitude}, ${packet.targetLatitude}`);
+
+
+    //     if (game.canPaintIn(player, zone, tile))
+    //         game.playerPaint(player, tile, packet.color);
+    // } 
+
+
+    export function paint(player: Player, targetLongitude: number, targetLatitude: number, color: Color): boolean {
+        const gpsPosition = new GPS(targetLongitude, targetLatitude);
         const position = gpsPosition.toVector2();
 
         const zone = game.getZoneWithTile(position);
-        if (!zone) return console.error(`[Socket] Error Player : Zone not found at : ${packet.targetLongitude}, ${packet.targetLatitude}`);
-            
+        if (!zone) 
+            return (console.error(`[Socket] Error Player : Zone not found at : ${targetLongitude}, ${targetLatitude}`), false);
 
-        const tile = zone?.getTile(position.x, position.y);
-        if (!tile) return console.error(`[Socket] Error Player : Tile not found at : ${packet.targetLongitude}, ${packet.targetLatitude}`);
+        const tile = game.getTile(position);
+        if (!tile) 
+            return (console.error(`[Socket] Error Player : Tile not found at : ${targetLongitude}, ${targetLatitude}`), false);
+        
+        if (game.canPaintAt(player, position, zone))
+            game.playerPaint(player, tile, color);
 
-
-        if (game.canPaintIn(player, zone, tile))
-            game.playerPaint(player, tile, packet.color);
-    } 
+        return true;
+    }
 }

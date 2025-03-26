@@ -1,6 +1,8 @@
 import { Router } from "express";
 import gameGroupRoutes from "./game/game_group_routes";
 import gameShopRoutes from "./game/game_shop_routes";
+import gamePlayRoutes from "./game/game_play_routes";
+import { GameServer } from "../../src/game/GameServer";
 
 
 
@@ -11,10 +13,12 @@ const gameRoutes = Router();
 
 
 gameRoutes.use("/*", async (request, response, next) => {
-    const { password } = request.body;
+    const { token } = request.body;
 
-	// if (!password) return next({ code: 400, message: `The password must be provided` });
+	if (!token) return next({ code: 400, message: `The token must be provided` });
 	// if (!bot_connection.checkPassword(password)) return next({ code: 401, message: `Unauthorised access` });
+
+    const player = GameServer.
 
 	return next();
 });
@@ -43,11 +47,10 @@ gameRoutes.post("/map", async (request, response, next) => {
 
 
 
-
-
 gameRoutes.post("/shop", gameShopRoutes);
-
 gameRoutes.post("/groups", gameGroupRoutes);
+
+gameRoutes.post("/play", gamePlayRoutes);
 
 
 

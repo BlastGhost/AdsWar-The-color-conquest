@@ -13,7 +13,7 @@ import Tile from "./Tile.js";
 export default class Zone {
     public static readonly SIZE = 11;
 
-    public tiles = new TileManager();
+    // public tiles = new TileManager();
     /** Le point de départ de la zone (en haut à gauche) */
     public position: Vector2;
     /** La taille de la zone (en bas à droite) */
@@ -50,8 +50,8 @@ export default class Zone {
         for (let x = -xSize / 2; x < xSize / 2; x++) {
             for (let y = -ySize / 2; y < ySize / 2; y++) {
 
-                const tile = new Tile(x, y);
-                this.tiles.set(tile.position.toMinimalString(), tile);
+                // const tile = new Tile(x, y);
+                // this.tiles.set(tile.position.toMinimalString(), tile);
 
             }
         }
@@ -99,22 +99,6 @@ export default class Zone {
         }
         else {
             return this.hasCoord(xOrPos.x, xOrPos.y);
-        }
-    }
-
-
-
-    public getTile(position: Position): Tile | undefined;
-    public getTile(x: number, y: number): Tile | undefined;
-    public getTile(xOrPosition: number | Position, y?: number): Tile | undefined {
-        if (typeof xOrPosition === "number") {
-            if (!y) return console.error("Get Tile but y coordinate missing"), undefined;
-            if (!this.hasCoord(xOrPosition, y)) return undefined;
-
-            return this.tiles.getTile(xOrPosition, y);
-        }
-        else {
-            return this.getTile(xOrPosition.x, xOrPosition.y);
         }
     }
 

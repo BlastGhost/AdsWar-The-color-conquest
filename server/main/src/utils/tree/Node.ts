@@ -1,8 +1,9 @@
 import Vector2 from "../../game/world/utils/Vector2.js";
+import Comparable from "../Comparable.js";
 
 
 
-export default class Node<T> {
+export default class Node<T extends Comparable<T>> {
     public data?: T;
 
     public topLeft?: Node<T>;
@@ -41,7 +42,7 @@ export default class Node<T> {
 
 
     public childrenEquals(): boolean {
-        return this.topLeft?.data === this.topRight?.data && this.topLeft?.data === this.bottomLeft?.data && this.topLeft?.data === this.bottomRight?.data;
+        return (this.topLeft?.data?.equals(this.topRight?.data) && this.topLeft?.data?.equals(this.bottomLeft?.data) && this.topLeft?.data?.equals(this.bottomRight?.data)) ?? false;
     }
 
     public clear(): void {
