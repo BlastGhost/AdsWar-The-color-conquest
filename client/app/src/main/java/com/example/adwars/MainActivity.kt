@@ -14,7 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.adwars.component.Caroussel
+import com.example.adwars.component.Carousel
 import com.example.adwars.component.MapApi
 import com.example.adwars.component.ProductCard
 import com.example.adwars.ui.theme.AdWarsTheme
@@ -26,19 +26,21 @@ class MainActivity : ComponentActivity() {
         setContent {
             AdWarsTheme {
                 val list: MutableList<@Composable () -> Unit> = mutableListOf()
-                for (i in 1..10){
+                for (i in 1..10) {
                     list.add {
                         ProductCard(
                             productName = R.string.item_test,
                             image = R.drawable.ic_launcher_foreground,
                             contentDescription = R.string.item_description
-                            )
+                        )
                     }
                 }
 
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
 
+
                 }
+
             }
         }
     }
@@ -46,7 +48,7 @@ class MainActivity : ComponentActivity() {
 
 @Preview(showBackground = true)
 @Composable
-fun Mainpreview(){
+fun MainPreview() {
     AdWarsTheme {
         Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
             val list: MutableList<@Composable () -> Unit> = mutableListOf()
@@ -61,7 +63,7 @@ fun Mainpreview(){
             }
             Box(modifier = Modifier.fillMaxSize()) {
                 MapApi()
-                Caroussel(
+                Carousel(
                     horizontalArrangement = Arrangement.spacedBy(20.dp),
                     listContent = list,
                     modifier = Modifier

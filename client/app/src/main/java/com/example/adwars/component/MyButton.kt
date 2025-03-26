@@ -13,9 +13,9 @@ import com.example.adwars.R
 
 @Composable
 fun MyButton(
-    content: @Composable () -> Unit,
     modifier: Modifier = Modifier,
     onClick: () -> Unit = {},
+    content: @Composable () -> Unit,
 ) {
     Button(
         onClick = onClick,
@@ -31,13 +31,12 @@ fun PreviewMyButton() {
     Scaffold { innerPadding ->
 
         MyButton(
-            content = {
-                Text(text = stringResource(R.string.go))
-                      },
             modifier = Modifier.padding(innerPadding),
             onClick = {
             }
-        )
+        ) {
+            Text(text = stringResource(R.string.go))
+        }
     }
 
 }

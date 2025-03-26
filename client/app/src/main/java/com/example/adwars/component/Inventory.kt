@@ -2,13 +2,13 @@ package com.example.adwars.component
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -18,10 +18,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import com.example.adwars.R
+import com.example.adwars.ui.theme.Modifiers
 
 @Composable
 fun Inventory(
@@ -38,56 +37,49 @@ fun Inventory(
             )
         }
     }
+
+
     Column(
-        modifier = modifier
-            .padding(horizontal = 20.dp, vertical = 20.dp)
-            .clip(shape = RoundedCornerShape(5))
-            .background(color = backgroundColor)
+        Modifier
+            .clip(Modifiers.borderRadiusMedium)
+            .background(backgroundColor),
     ) {
-        Box(
-            modifier = Modifier
+        Row(
+            Modifier
                 .fillMaxWidth()
+                .padding(Modifiers.paddingMedium),
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically,
         ) {
             Text(
-                text = stringResource(R.string.inventory),
-                fontSize = TextUnit(20f, TextUnitType.Sp),
+                stringResource(R.string.inventory),
+                fontSize = Modifiers.fontSizeMedium,
                 color = colorResource(R.color.secondary),
-                modifier = Modifier
-                    .align(alignment = Alignment.TopStart)
-                    .padding(top = 10.dp, start = 25.dp)
             )
             Text(
-                text = "0000 pièces",
-                fontSize = TextUnit(20f, TextUnitType.Sp),
+                "0000 $",
+                Modifier
+                    .border(
+                        width = 1.dp,
+                        color = colorResource(R.color.white),
+                        shape = RoundedCornerShape(100.dp)
+                    )
+                    .padding(Modifiers.paddingLarge, Modifiers.paddingSmall),
+                fontSize = Modifiers.fontSizeMedium,
                 color = colorResource(R.color.secondary),
-                modifier = Modifier
-                    .align(alignment = Alignment.TopEnd)
-                    .padding(top = 10.dp, end = 15.dp)
-                    .border(width = 2.dp, color = colorResource(R.color.white), shape = RoundedCornerShape(10.dp))
-                    .padding(3.dp)
-            )
-            Caroussel(
-                listContent = list,
-                modifier = modifier
-                    .padding(top = 25.dp)
             )
         }
+
+        Carousel(
+            list,
+            Modifier.padding(start = Modifiers.paddingMedium, bottom = Modifiers.paddingMedium)
+        )
     }
 }
 
 
-@Preview(showBackground = true)
+@Preview()
 @Composable
 fun InventoryPreview() {
-    Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-
-        Box(
-            contentAlignment = Alignment.BottomCenter,
-            modifier = Modifier
-                .fillMaxSize()
-                .background(color = Color.White)
-        ) {
-            Inventory()
-        }
-    }
+    Inventory()
 }

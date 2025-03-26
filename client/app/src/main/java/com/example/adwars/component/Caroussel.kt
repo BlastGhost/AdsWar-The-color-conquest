@@ -3,6 +3,7 @@ package com.example.adwars.component
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -16,17 +17,15 @@ import com.example.adwars.ui.theme.AdWarsTheme
 
 
 @Composable
-fun Caroussel(
+fun Carousel(
+    listContent: MutableList<@Composable () -> Unit>,
     modifier: Modifier = Modifier,
-    contentPadding: Dp = 16.dp,
     horizontalArrangement: Arrangement.Horizontal = Arrangement.spacedBy(20.dp),
-    listContent: MutableList<@Composable () -> Unit> = ArrayList()
 ) {
     LazyRow(
-        contentPadding = PaddingValues(contentPadding),
+        modifier.fillMaxWidth(),
         horizontalArrangement = horizontalArrangement,
-        modifier = modifier
-    ){
+    ) {
         items(listContent) { elem ->
             elem()
         }
@@ -46,7 +45,7 @@ fun CarousselPreview() {
                     SaveVariable()
                 }
             }
-            Caroussel(
+            Carousel(
                 horizontalArrangement = Arrangement.spacedBy(20.dp),
                 modifier = Modifier
                     .padding(innerPadding),

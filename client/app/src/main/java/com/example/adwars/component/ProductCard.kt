@@ -4,9 +4,13 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -28,6 +32,7 @@ import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import com.example.adwars.R
 import com.example.adwars.ui.theme.AdWarsTheme
+import com.example.adwars.ui.theme.Modifiers
 
 @Composable
 fun ProductCard(
@@ -41,39 +46,55 @@ fun ProductCard(
     Box(
         contentAlignment = Alignment.BottomCenter,
         modifier = modifier
-            .shadow(elevation = 10.dp, shape = RoundedCornerShape(22.dp))
+            .height(120.dp)
+            .aspectRatio(1f / 1f)
+            .shadow(
+                elevation = 10.dp,
+                shape = Modifiers.borderRadiusMedium
+            )
     ) {
-
         Image(
             painter = imagePainter,
             contentDescription = stringResource(contentDescription),
             contentScale = ContentScale.Crop,
             modifier = Modifier
+                .matchParentSize()
                 .background(color = Color.Transparent)
-                .clip(RoundedCornerShape(22.dp))
+                .clip(Modifiers.borderRadiusMedium)
         )
+
         Box(
-            modifier = Modifier
+            Modifier
+                .matchParentSize()
                 .background(
                     brush = Brush.verticalGradient(
                         colors = listOf(
                             Color.Transparent,
                             Color.DarkGray
-                        ), startY = 170.0f
-                    ), shape = RoundedCornerShape(20.dp)
+                        ),
+                        startY = 170.0f
+                    ),
                 )
-                .width(100.dp)
-                .aspectRatio(1f / 1f)
-
-
-        ) {}
-        Text(
-            text = stringResource(productName),
-            color = Color.White,
-            fontSize = TextUnit(value = 25.0f, type = TextUnitType.Sp),
-            modifier = Modifier
-                .padding(top = 15.dp)
         )
+
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .padding(Modifiers.paddingSmall),
+            horizontalArrangement = Arrangement.SpaceBetween,
+        ) {
+            Text(
+                text = stringResource(productName),
+                color = Color.White,
+                fontSize = Modifiers.fontSizeMedium,
+            )
+
+            Text(
+                "x NN",
+                color = Color.White,
+                fontSize = Modifiers.fontSizeMedium,
+            )
+        }
     }
 
 }
@@ -82,14 +103,9 @@ fun ProductCard(
 @Preview
 @Composable
 fun ProductcardPreview() {
-    AdWarsTheme {
-        Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-            ProductCard(
-                productName = R.string.item_test,
-                image = R.drawable.ic_launcher_background,
-                contentDescription = R.string.item_description,
-                modifier = Modifier.padding(innerPadding)
-            )
-        }
-    }
+    ProductCard(
+        productName = R.string.item_test,
+        image = R.drawable.ic_launcher_background,
+        contentDescription = R.string.item_description,
+    )
 }
