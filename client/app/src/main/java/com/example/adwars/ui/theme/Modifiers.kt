@@ -1,0 +1,42 @@
+package com.example.adwars.ui.theme
+
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.unit.TextUnit
+import androidx.compose.ui.unit.TextUnitType
+import androidx.compose.ui.unit.dp
+
+class Modifiers {
+    companion object {
+        val borderRadiusSmall = RoundedCornerShape(6.dp)
+        val borderRadiusMedium = RoundedCornerShape(10.dp)
+        val borderRadiusLarge = RoundedCornerShape(12.dp)
+
+        val paddingSmall = 6.dp
+        val paddingMedium = 10.dp
+        val paddingLarge = 20.dp
+
+        val gapMedium = paddingMedium
+        val gapLarge = paddingLarge
+
+
+        val fontSizeSmall = TextUnit(14f, TextUnitType.Sp)
+        val fontSizeMedium = TextUnit(18f, TextUnitType.Sp)
+        val fontSizeLarge = TextUnit(24f, TextUnitType.Sp)
+
+
+        val BOX = Modifier
+            .fillMaxWidth()
+            .clip(borderRadiusMedium)
+
+        val INPUT_FIELD = BOX
+            .background(Color.White)
+            .border(2.dp, Color.Black, shape = borderRadiusMedium)
+    }
+}
