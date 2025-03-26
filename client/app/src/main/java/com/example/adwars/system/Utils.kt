@@ -12,7 +12,7 @@ class Utils {
                 val keys = jsonObject.keys()
 
                 while (keys.hasNext()) {
-                    val key = keys.next()
+                    val key = keys.next().toString()
                     finalJson.put(key, jsonObject[key])
                 }
             }
