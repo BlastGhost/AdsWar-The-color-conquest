@@ -12,7 +12,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -22,10 +21,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -34,20 +30,18 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.TextUnit
-import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
 import com.example.adwars.MainActivity
 import com.example.adwars.R
+import com.example.adwars.component.ADButton
 import com.example.adwars.component.Inventory
-import com.example.adwars.component.MyButton
 import com.example.adwars.ui.theme.AdWarsTheme
 import com.example.adwars.ui.theme.Modifiers
 
@@ -190,7 +184,7 @@ fun Username(
 
 
 @Composable
-fun TimeRemaining() {
+private fun TimeRemaining() {
     Text(
         "XXj - 00h00m00s",
         fontWeight = FontWeight.ExtraBold,
@@ -201,7 +195,7 @@ fun TimeRemaining() {
 
 
 @Composable
-fun TeamProgression() {
+private fun TeamProgression() {
     Column(
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
@@ -231,7 +225,7 @@ fun TeamProgression() {
 
 
 @Composable
-fun PaintTank() {
+private fun PaintTank() {
     Box(
         Modifier
             .height(120.dp)
@@ -257,15 +251,13 @@ fun Map() {
 
 
 @Composable
-fun GoButton(onClick: () -> Unit) {
-    Button(
+private fun GoButton(onClick: () -> Unit) {
+    ADButton(
         onClick,
-        Modifiers.BOX
-            .fillMaxWidth()
-            .height(60.dp)
     ) {
         Text(
-            "GO !",
+            stringResource(R.string.go),
+            color = colorResource(R.color.secondary),
             fontSize = Modifiers.fontSizeMedium,
             fontWeight = FontWeight.Bold,
         )
@@ -275,12 +267,44 @@ fun GoButton(onClick: () -> Unit) {
 
 @Preview(showBackground = true)
 @Composable
-fun ComposablePreview() {
-    Box(
-        Modifiers.INPUT_FIELD
-            .height(40.dp)
-    ) {
+private fun ComposablePreview() {
+    AdWarsTheme {
+        Scaffold(
+            modifier = Modifier.fillMaxSize()
+        ) { innerPadding ->
+            Column(
+                modifier = Modifier
+                    .padding(innerPadding)
+                    .fillMaxSize()
+                    .padding(Modifiers.paddingLarge)
+                ,
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.SpaceBetween
+            ) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                ) {
+                    Username("USERNAME")
+                    TimeRemaining()
+                }
 
+                Row(
+                    Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceAround,
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    TeamProgression()
+                    PaintTank()
+                }
+
+                // MAP
+                Map()
+                Inventory()
+                GoButton { }
+            }
+
+        }
     }
 
 
