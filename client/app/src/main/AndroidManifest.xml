@@ -28,7 +28,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".activities.MainMenu"
+            android:name=".activities.Dashboard"
             android:exported="true"
             android:theme="@style/Theme.AdWars">
             <intent-filter>
