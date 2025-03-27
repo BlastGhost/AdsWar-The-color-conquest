@@ -5,8 +5,9 @@
     <string name="inventory">Inventory</string>
     <string name="shop">Shop</string>
     <string name="coins">Coins</string>
-
+    <string name="buy">Buy</string>
     <string name="go">GO !</string>
+    <string name="group">Group name</string>
 
     <string name="new_battle_title">New battle in coming !</string>
     <string name="new_battle_start">Start in</string>
