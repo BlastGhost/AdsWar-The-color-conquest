@@ -1,7 +1,7 @@
 import mongodb_connection from "./connection.js";
 
 // Initialisation de la base de données local
-import "./database/local.js";
+import "./local.js";
 
 
 

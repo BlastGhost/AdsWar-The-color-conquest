@@ -1,8 +1,8 @@
 import { Router } from "express";
-import gameGroupRoutes from "./game/game_group_routes";
-import gameShopRoutes from "./game/game_shop_routes";
-import gamePlayRoutes from "./game/game_play_routes";
-import { GameServer } from "../../src/game/GameServer";
+import gameGroupRoutes from "./game/game_group_routes.js";
+import gameShopRoutes from "./game/game_shop_routes.js";
+import gamePlayRoutes from "./game/game_play_routes.js";
+import { GameServer } from "../../src/game/GameServer.js";
 
 
 
@@ -18,7 +18,7 @@ gameRoutes.use("/*", async (request, response, next) => {
 	if (!token) return next({ code: 400, message: `The token must be provided` });
 	// if (!bot_connection.checkPassword(password)) return next({ code: 401, message: `Unauthorised access` });
 
-    const player = GameServer.
+    const player = GameServer.getProfile(token)
 
 	return next();
 });
