@@ -23,6 +23,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.adwars.R
 import com.example.adwars.ui.theme.Modifiers
@@ -52,4 +53,12 @@ fun NavBar(
         )
 
     }
+}
+
+
+
+@Composable
+@Preview
+private fun NavPreview() {
+    NavBar("Bonjour")
 }

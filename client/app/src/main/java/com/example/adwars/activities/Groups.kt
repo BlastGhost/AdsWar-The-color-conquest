@@ -20,9 +20,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.adwars.component.cards.GroupCard
+import com.example.adwars.component.utils.TextInputBar
 import com.example.adwars.component.utils.NavBar
+import com.example.adwars.component.utils.SearchBar
 import com.example.adwars.ui.theme.AdWarsTheme
 import com.example.adwars.ui.theme.Modifiers
+import java.util.ArrayList
 
 class Groups : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -72,11 +75,11 @@ private fun GroupsPreview() {
                     "Groups",
                 )
 
-                // TODO : Search Bar
                 Box(
-                    Modifier.padding(horizontal = Modifiers.paddingLarge)
+                    Modifier
+                        .padding(horizontal = Modifiers.paddingLarge)
                 ) {
-                    Box(Modifiers.SEARCH_BAR)
+                    SearchBar("R.string.search_group", ArrayList())
                 }
 
                 Column(

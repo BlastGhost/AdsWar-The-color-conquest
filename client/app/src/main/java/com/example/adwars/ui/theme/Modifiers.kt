@@ -2,6 +2,7 @@ package com.example.adwars.ui.theme
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -45,8 +46,9 @@ class Modifiers {
         val INPUT_FIELD = BOX
             .background(Color.White)
             .border(2.dp, Color.Black, shape = borderRadiusMedium)
-            .height(40.dp)
-            .width(40.dp)
+            .defaultMinSize(minHeight = 60.dp)
+            // .height(40.dp)
+            // .width(40.dp)
 
         val SEARCH_BAR = INPUT_FIELD
     }

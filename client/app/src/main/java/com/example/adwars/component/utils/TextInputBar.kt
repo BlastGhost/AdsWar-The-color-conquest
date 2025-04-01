@@ -1,5 +1,6 @@
-package com.example.adwars.component
+package com.example.adwars.component.utils
 
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
@@ -7,25 +8,29 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.example.adwars.R
 import com.example.adwars.ui.theme.Modifiers
 
 @Composable
-fun TextBar() {
-    val init = stringResource(R.string.group)
+fun TextInputBar(
+    placeholder: String,
+    onValueChanged: (String) -> Unit,
+) {
     var textState by rememberSaveable { mutableStateOf("") }
 
     TextField(
-        value = textState,
+        textState,
+        onValueChanged,
+        Modifiers.INPUT_FIELD,
         singleLine = true,
-        onValueChange = {
-            textState = it
+        placeholder = {
+            Text(
+                placeholder,
+                Modifier
+                    .fillMaxWidth(),
+            )
         },
-        placeholder = {Text(text = init)},
-        modifier = Modifiers.INPUT_FIELD
-
     )
 }
 
@@ -33,5 +38,5 @@ fun TextBar() {
 @Preview(showBackground = true)
 @Composable
 fun PreviewBar() {
-    TextBar()
+    TextInputBar("Test Name", {})
 }

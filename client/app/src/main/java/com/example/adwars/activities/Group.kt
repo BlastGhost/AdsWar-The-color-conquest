@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -23,9 +22,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.adwars.component.cards.PlayerCard
+import com.example.adwars.component.utils.TextInputBar
 import com.example.adwars.component.utils.NavBar
+import com.example.adwars.component.utils.SearchBar
 import com.example.adwars.ui.theme.AdWarsTheme
 import com.example.adwars.ui.theme.Modifiers
+import java.util.ArrayList
 
 class Group : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,7 +58,8 @@ private fun PlayerCardBox(modifier: Modifier = Modifier) {
 private fun GroupPreview() {
     AdWarsTheme {
         Scaffold(
-            modifier = Modifier.fillMaxSize()
+            modifier = Modifier
+                .fillMaxSize()
         ) { innerPadding ->
             Column(
                 Modifier
@@ -69,11 +72,11 @@ private fun GroupPreview() {
                     "Group Name",
                 )
 
-                // TODO : Search Bar
                 Box(
-                    Modifier.padding(horizontal = Modifiers.paddingLarge)
+                    Modifier
+                        .padding(horizontal = Modifiers.paddingLarge)
                 ) {
-                    Box(Modifiers.SEARCH_BAR)
+                    SearchBar("R.string.search_group", ArrayList())
                 }
 
                 Text(
