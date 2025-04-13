@@ -14,7 +14,7 @@ import com.mapbox.maps.extension.style.expressions.generated.Expression.Companio
 fun MapApi(
     modifier: Modifier = Modifier
 ) {
-    /**MapboxMap(
+    MapboxMap(
         modifier,
         mapViewportState = rememberMapViewportState {
             setCameraOptions {
@@ -24,7 +24,7 @@ fun MapApi(
                 bearing(0.0)
             }
         },
-    )*/
+    )
 }
 
 

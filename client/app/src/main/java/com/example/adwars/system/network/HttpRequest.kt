@@ -14,8 +14,11 @@ class HttpRequest(
     private val path: String,
     private val context: Context,
     private val onReceivedCallback: HttpCallback = {},
-    private val body: JSONObject? = null
+    private var additionalBody: JSONObject? = null
 ) {
+    var body: JSONObject = this.baseBody()
+
+
     companion object {
         fun PAINT(context: Context, onReceivedCallback: HttpCallback = {}) = HttpRequest(Request.Method.POST, "paint", context, onReceivedCallback)
 
@@ -31,10 +34,8 @@ class HttpRequest(
 
 
     private fun createRequest(): JsonObjectRequest {
-        val body = this.baseBody()
-
-        if (this.body != null)
-            Utils.merge(body, this.body)
+        if (this.additionalBody != null)
+            this.body = Utils.merge(this.body, this.additionalBody!!)
 
 
         val request = JsonObjectRequest(

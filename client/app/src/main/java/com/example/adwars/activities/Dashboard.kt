@@ -22,7 +22,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Button
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -30,6 +29,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
@@ -40,8 +40,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.adwars.MainActivity
 import com.example.adwars.R
-import com.example.adwars.component.ADButton
+import com.example.adwars.component.AdButton
 import com.example.adwars.component.Inventory
+import com.example.adwars.component.PaintTank
 import com.example.adwars.ui.theme.AdWarsTheme
 import com.example.adwars.ui.theme.Modifiers
 
@@ -104,7 +105,7 @@ class Dashboard : ComponentActivity(), SensorEventListener {
                             verticalAlignment = Alignment.CenterVertically,
                         ) {
                             TeamProgression()
-                            PaintTank()
+                            // PaintTank(Color.Cyan, 50f, 100f)
                         }
 
                         // MAP
@@ -162,22 +163,29 @@ fun Username(
             .height(60.dp)
             .background(
                 color = colorResource(R.color.primary),
-            ),
+            )
+            .background(Color(1f, 1f, 1f, 0.5f)),
         contentAlignment = Alignment.Center,
     ) {
-        Column(
-            Modifier.fillMaxSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Center,
-        ) {
-            Text(
-                username,
-                color = colorResource(R.color.secondary),
-                fontSize = Modifiers.fontSizeMedium,
-                fontWeight = FontWeight.Bold,
-                textAlign = TextAlign.Center,
-            )
-        }
+        // Column(
+        //     Modifier.fillMaxSize(),
+        //     horizontalAlignment = Alignment.CenterHorizontally,
+        //     verticalArrangement = Arrangement.Center,
+        // ) {
+            // Box(
+            //     Modifier
+            //         .matchParentSize()
+            //         .background(Color.White)
+            // )
+        // }
+        PaintTank(colorResource(R.color.primary), 25f, 100f)
+        Text(
+            username,
+            color = colorResource(R.color.secondary),
+            fontSize = Modifiers.fontSizeMedium,
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Center,
+        )
     }
 }
 
@@ -252,7 +260,7 @@ fun Map() {
 
 @Composable
 private fun GoButton(onClick: () -> Unit) {
-    ADButton(
+    AdButton(
         onClick,
     ) {
         Text(
@@ -295,7 +303,7 @@ private fun ComposablePreview() {
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     TeamProgression()
-                    PaintTank()
+                    PaintTank(Color.Cyan, 50f, 100f)
                 }
 
                 // MAP

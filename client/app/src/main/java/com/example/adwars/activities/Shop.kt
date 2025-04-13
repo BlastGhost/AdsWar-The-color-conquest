@@ -27,8 +27,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.TextUnitType
 import androidx.compose.ui.unit.dp
+import com.android.volley.Request
 import com.example.adwars.R
 import com.example.adwars.component.ProductCard
+import com.example.adwars.system.models.Product
+import com.example.adwars.system.network.HttpCallback
+import com.example.adwars.system.network.HttpRequest
 import com.example.adwars.ui.theme.AdWarsTheme
 import kotlin.jvm.java
 
@@ -109,5 +113,17 @@ class Shop : ComponentActivity() {
             }
         }
 
+    }
+
+
+    private fun getProducts() {
+        val request = HttpRequest(Request.Method.GET, "/shop", this, {})
+        request.call()
+
+        val products = request.response as ArrayList<Product>
+
+        for (product in products) {
+
+        }
     }
 }

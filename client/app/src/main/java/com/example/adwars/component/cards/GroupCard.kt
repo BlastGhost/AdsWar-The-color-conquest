@@ -15,6 +15,7 @@ import com.example.adwars.ui.theme.Modifiers
 
 @Composable
 fun GroupCard(
+    name: String,
     modifier: Modifier = Modifier
 ) {
     Box(
@@ -28,7 +29,7 @@ fun GroupCard(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween,
         ) {
-            Text("Group Name")
+            Text(name)
             Text("XX / YY")
         }
     }

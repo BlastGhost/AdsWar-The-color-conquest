@@ -51,5 +51,12 @@ class Modifiers {
             // .width(40.dp)
 
         val SEARCH_BAR = INPUT_FIELD
+
+        val BUTTON = Modifier
+            .height(48.dp)
+            .width(48.dp)
+            .clip(borderRadiusMedium)
+            .background(Color.DarkGray)
+            .border(2.dp, Color.White, shape = borderRadiusMedium)
     }
 }

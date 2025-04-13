@@ -8,12 +8,9 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.rememberScrollState
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,12 +19,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.adwars.R
-import com.example.adwars.component.ADButton
+import com.example.adwars.component.AdButton
 import com.example.adwars.component.text.BigTitle
-import com.example.adwars.component.utils.NavBar
 import com.example.adwars.ui.theme.AdWarsTheme
 import com.example.adwars.ui.theme.Modifiers
 
@@ -82,7 +77,7 @@ private fun CreateGroupPreview() {
                 Box(
                     Modifier.align(Alignment.BottomCenter)
                 ) {
-                    ADButton({}) {
+                    AdButton({}) {
                         Text(
                             stringResource(R.string.create_group_button),
                             color = colorResource(R.color.secondary),

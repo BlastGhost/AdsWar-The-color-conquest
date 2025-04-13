@@ -71,7 +71,7 @@ fun Inventory(
 
         Carousel(
             list,
-            Modifier.padding(start = Modifiers.paddingMedium, bottom = Modifiers.paddingMedium)
+            Modifier.padding(start = Modifiers.paddingMedium, end = Modifiers.paddingMedium, bottom = Modifiers.paddingMedium)
         )
     }
 }
