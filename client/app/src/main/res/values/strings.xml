@@ -7,12 +7,17 @@
     <string name="coins">Coins</string>
     <string name="buy">Buy</string>
     <string name="go">GO !</string>
+
     <string name="group">Group name</string>
 
     <string name="new_battle_title">New battle in coming !</string>
     <string name="new_battle_start">Start in</string>
     <string name="new_battle_painter">Painter</string>
     <string name="new_battle_viewer">Viewer</string>
+
+
+    <string name="groups_title">Groups</string>
+    <string name="groups_search_group">Search group</string>
 
     <string name="create_group_title">Create group</string>
     <string name="create_group_input_name">Group name</string>
